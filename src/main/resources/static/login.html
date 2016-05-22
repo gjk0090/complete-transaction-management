@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	
+    <title>Log In Page</title>
+  </head>
+  <body onload="init();">
+  	<div class="container">
+	  	<div class="col-md-offset-4 col-md-4">
+		    <form name="loginform" class="form-auth" action="/login" method="POST">
+		    	<h2>Log In</h2>
+		    	<p id="message"></p>
+		    	<hr>
+		    	<label for="username">User Name:</label>
+		    	<input id="username" name="username" type="text" class="form-control"/>
+		      	<label for="password">Password:</label>
+		      	<input id="password" name="password" type="password" class="form-control"/>
+		      	<hr>
+		      	<input type="submit" value="Log In" class="btn btn-primary" />
+		      	<input id="csrftoken" type="hidden" name="_csrf" value="" />
+		    </form>
+	    </div>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  	
+  	<script>
+	  	function getCookie(cname) {
+	  	    var name = cname + "=";
+	  	    var ca = document.cookie.split(';');
+	  	    for(var i = 0; i <ca.length; i++) {
+	  	        var c = ca[i];
+	  	        while (c.charAt(0)==' ') {
+	  	            c = c.substring(1);
+	  	        }
+	  	        if (c.indexOf(name) == 0) {
+	  	            return c.substring(name.length,c.length);
+	  	        }
+	  	    }
+	  	    return "Cookie not found for "+name;
+	  	}
+  	</script>
+  	<script>
+  		function init(){
+  			document.getElementById("csrftoken").value = getCookie("XSRF-TOKEN");
+  			var search = location.search;
+  			if(search.includes("error")){
+  				document.getElementById("message").innerHTML = "Sorry, username or password is incorrect.";
+  			}else if(search.includes("logout")){
+  				document.getElementById("message").innerHTML = "You have successfully loggeg out.";
+  			}
+  		}
+  	</script>
+  </body>
+</html>
