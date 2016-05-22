@@ -33,7 +33,7 @@ import org.springframework.web.util.WebUtils;
 public class MainApplication {
 
     public static void main(String[] args) {
-	SpringApplication.run(MainApplication.class, args);
+    	SpringApplication.run(MainApplication.class, args);
     }
 
     @Configuration
@@ -41,15 +41,15 @@ public class MainApplication {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-	    registry.addViewController("/login").setViewName("login");
-	    //registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		registry.addViewController("/login").setViewName("login");
+		//registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 
 	@Bean
 	public ViewResolver viewResolver() {
-	    InternalResourceViewResolver bean = new InternalResourceViewResolver();
-	    bean.setSuffix(".html");
-	    return bean;
+		InternalResourceViewResolver bean = new InternalResourceViewResolver();
+		bean.setSuffix(".html");
+		return bean;
 	}
     }
 
@@ -57,57 +57,57 @@ public class MainApplication {
     @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
     protected static class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-	    http
-	    	.authorizeRequests().anyRequest().authenticated()
-	    	.and()
-	    	.formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
-		.and()
-		.logout().logoutSuccessUrl("/login?logout").permitAll()
-		.and()
-		.httpBasic()
-		.and()
-		.csrf().csrfTokenRepository(csrfTokenRepository())
-		.and()
-		.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
-	}
-
-	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-	    auth.inMemoryAuthentication()
-	    .withUser("admin").password("admin").roles("ADMIN", "USER")
-	    .and()
-	    .withUser("gjk").password("gjk").roles("USER");
-	}
-
-	// setting csrf token into cookie for html page
-	private Filter csrfHeaderFilter() {
-	    return new OncePerRequestFilter() {
 		@Override
-		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		    CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-		    if (csrf != null) {
-			Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
-			String token = csrf.getToken();
-			if (cookie == null || token != null && !token.equals(cookie.getValue())) {
-			    cookie = new Cookie("XSRF-TOKEN", token);
-			    cookie.setPath("/");
-			    response.addCookie(cookie);
-			}
-		    }
-		    filterChain.doFilter(request, response);
+		protected void configure(HttpSecurity http) throws Exception {
+			http
+			.authorizeRequests().anyRequest().authenticated()
+			.and()
+			.formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
+			.and()
+			.logout().logoutSuccessUrl("/login?logout").permitAll()
+			.and()
+			.httpBasic()
+			.and()
+			.csrf().csrfTokenRepository(csrfTokenRepository())
+			.and()
+			.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
 		}
-	    };
-	}
-
-	// customizing the CSRF filter for Angular
-	// when getting csrf token, use name "X-XRSF-TOKEN" instead of the default "X-CSRF-TOKEN".
-	private CsrfTokenRepository csrfTokenRepository() {
-	    HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-	    repository.setHeaderName("X-XSRF-TOKEN");
-	    return repository;
-	}
+	
+		@Override
+		public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		    auth.inMemoryAuthentication()
+		    .withUser("admin").password("admin").roles("ADMIN", "USER")
+		    .and()
+		    .withUser("gjk").password("gjk").roles("USER");
+		}
+	
+		// setting csrf token into cookie for html page
+		private Filter csrfHeaderFilter() {
+			return new OncePerRequestFilter() {
+				@Override
+				protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+					CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+					if (csrf != null) {
+						Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
+						String token = csrf.getToken();
+						if (cookie == null || token != null && !token.equals(cookie.getValue())) {
+							cookie = new Cookie("XSRF-TOKEN", token);
+							cookie.setPath("/");
+							response.addCookie(cookie);
+						}
+					}
+					filterChain.doFilter(request, response);
+				}
+			};
+		}
+	
+		// customizing the CSRF filter for Angular
+		// when getting csrf token, use name "X-XRSF-TOKEN" instead of the default "X-CSRF-TOKEN".
+		private CsrfTokenRepository csrfTokenRepository() {
+			HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+			repository.setHeaderName("X-XSRF-TOKEN");
+			return repository;
+		}
 
     }
 
