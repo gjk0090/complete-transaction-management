@@ -1,5 +1,7 @@
--- this file will be automatically found and run by Spring convention.
--- even no need to create table.
+-- JPA has features for DDL generation
+-- http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-initialize-a-database-using-jpa
+-- Spring JDBC has a DataSource initializer feature. Spring Boot enables it by default and loads SQL from the standard locations schema.sql and data.sql (in the root of the classpath). 
+-- http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-initialize-a-database-using-spring-jdbc
 
 INSERT INTO book(isbn, title, author,description) VALUES ('1111111', 'The Spirit Thief (The Legend of Eli Monpress #1)', 'Rachel Aaron', 'des1');
  
