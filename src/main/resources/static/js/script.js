@@ -3,8 +3,10 @@ app.controller('mainCtrl',function($rootScope, $scope, $http, $location){
 
 	$http.get('rest/initInfo').then(
 		function(result){
-			$rootScope.userId = result.data.userId;
 			//alert(JSON.stringify(result.data));
+			$rootScope.userInfo = {
+				userId: result.data.userId
+			};
 		}, 
 		function(result){
 			
