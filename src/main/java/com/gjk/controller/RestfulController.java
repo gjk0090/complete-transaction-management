@@ -3,15 +3,22 @@ package com.gjk.controller;
 import java.security.Principal;
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gjk.domain.Book;
+import com.gjk.repository.BookRepository;
+
 @RestController
 @RequestMapping("/rest")
 public class RestfulController {
 
+	@Autowired
+	private BookRepository bookRepository;
+	
 	@RequestMapping(value = "/initInfo", method = RequestMethod.GET)
 	public Map<String, Object> getInitInfo(Principal principal) {
 
@@ -38,22 +45,8 @@ public class RestfulController {
 		return "Hello Spring-Boot";
 	}
 
-	@RequestMapping("/info")
-	public Map<String, String> getInfo(@RequestParam String name) {
-		Map<String, String> map = new HashMap<>();
-		map.put("name", name);
-		return map;
-	}
-
-	@RequestMapping("/list")
-	public List<Map<String, String>> getList() {
-		List<Map<String, String>> list = new ArrayList<>();
-		Map<String, String> map = null;
-		for (int i = 1; i <= 5; i++) {
-			map = new HashMap<>();
-			map.put("name", "gjk-" + i);
-			list.add(map);
-		}
-		return list;
+	@RequestMapping("/findAll")
+	public Iterable<Book> getList() {
+		return bookRepository.findAll();
 	}
 }
