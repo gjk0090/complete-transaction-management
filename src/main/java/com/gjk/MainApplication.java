@@ -8,7 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -39,24 +41,26 @@ public class MainApplication {
     @Configuration
     protected static class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/login").setViewName("login");
-		//registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-	}
-
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver bean = new InternalResourceViewResolver();
-		bean.setSuffix(".html");
-		return bean;
-	}
+		@Override
+		public void addViewControllers(ViewControllerRegistry registry) {
+			registry.addViewController("/login").setViewName("login");
+		}
+	
+		@Bean
+		public ViewResolver viewResolver() {
+			InternalResourceViewResolver bean = new InternalResourceViewResolver();
+			bean.setSuffix(".html");
+			return bean;
+		}
     }
 
     @Configuration
     @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
     protected static class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+    	
+    	@Autowired
+		private DataSource dataSource;
+    	
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
@@ -75,10 +79,12 @@ public class MainApplication {
 	
 		@Override
 		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		    auth.inMemoryAuthentication()
-		    .withUser("admin").password("admin").roles("ADMIN", "USER")
-		    .and()
-		    .withUser("gjk").password("gjk").roles("USER");
+			auth.jdbcAuthentication().dataSource(this.dataSource);
+			
+//		    auth.inMemoryAuthentication()
+//		    .withUser("admin").password("admin").roles("ADMIN", "USER")
+//		    .and()
+//		    .withUser("gjk").password("gjk").roles("USER");
 		}
 	
 		// setting csrf token into cookie for html page
