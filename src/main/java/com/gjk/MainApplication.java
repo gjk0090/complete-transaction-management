@@ -64,7 +64,9 @@ public class MainApplication {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
-			.authorizeRequests().anyRequest().authenticated()
+			.authorizeRequests()
+			.antMatchers("/h2-console").hasRole("ADMIN")// not working // role should not start with 'ROLE_' since it is automatically inserted
+			.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
 			.and()
