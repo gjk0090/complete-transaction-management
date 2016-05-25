@@ -45,8 +45,13 @@ public class RestfulController {
 		return "Hello Spring-Boot";
 	}
 
-	@RequestMapping("/findAll")
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public Iterable<Book> getList() {
 		return bookRepository.findAll();
+	}
+	
+	@RequestMapping(value = "/isAdmin", method = RequestMethod.GET)
+	public boolean isAdmin() {
+		return true;
 	}
 }
