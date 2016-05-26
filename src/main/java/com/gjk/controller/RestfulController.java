@@ -3,6 +3,8 @@ package com.gjk.controller;
 import java.security.Principal;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gjk.domain.Book;
+import com.gjk.domain.UserInfo;
 import com.gjk.repository.BookRepository;
+import com.gjk.repository.UserRepository;
 
 @RestController
 @RequestMapping("/rest")
@@ -18,9 +22,11 @@ public class RestfulController {
 
 	@Autowired
 	private BookRepository bookRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	@RequestMapping(value = "/initInfo", method = RequestMethod.GET)
-	public Map<String, Object> getInitInfo(Principal principal) {
+	public Map<String, Object> getInitInfo(Principal principal, HttpSession session) {
 
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 
@@ -29,13 +35,18 @@ public class RestfulController {
 			userId = principal.getName();
 		} else {
 			returnMap.put("error", true);
-			returnMap.put("message", "Sorry, failed to get user information, please log in again.");
+			returnMap.put("message", "Sorry, failed to get user id, please log in again.");
 			return returnMap;
 		}
 
-		returnMap.put("userId", userId);
-		// todo: User object
-		// todo: set session
+		UserInfo userInfo = userRepository.findUserInfoByUsername(userId);
+		if(userInfo == null){
+			returnMap.put("error", true);
+			returnMap.put("message", "Sorry, failed to get user information, please log in again.");
+			return returnMap;
+		}
+		returnMap.put("userInfo", userInfo);
+		session.setAttribute("userInfo", userInfo);
 
 		return returnMap;
 	}

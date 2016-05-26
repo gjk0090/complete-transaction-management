@@ -5,9 +5,12 @@ app.controller('mainCtrl',function($rootScope, $scope, $http, $location){
 	$http.get('rest/initInfo').then(
 		function(result){
 			//alert(JSON.stringify(result.data));
-			$rootScope.userInfo = {
-				userId: result.data.userId
-			};
+			if(result.data.error){
+				alert(result.data.message);
+				window.location="/login?logout";
+				return;
+			}
+			$rootScope.userInfo = result.data.userInfo;
 		}, 
 		function(result){
 			
