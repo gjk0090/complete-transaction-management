@@ -10,3 +10,14 @@ INSERT INTO book(isbn, title, author,description) VALUES ('5555555', 'Spirit''s 
 
 INSERT INTO userinfo(username, fname, lname, email) VALUES ('gjk', 'jk', 'gao', 'gaojk0090@gmail.com');
 INSERT INTO userinfo(username, fname, lname, email) VALUES ('admin', 'ad', 'min', 'gaojk0090@gmail.com');
+
+INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (1, 0, 'parentapp', 'parent app');
+INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (2, 1, 'childapp1', 'child app 1');
+INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (3, 1, 'childapp2', 'child app 2');
+
+INSERT INTO param(param_Id, parent_App_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param1', 'param 1', 1, '', '', 'text');
+INSERT INTO param(param_Id, parent_App_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param2', 'param 2', 2, '', '', 'text');
+INSERT INTO param(param_Id, parent_App_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param3', 'param 3', 3, '', '', 'text');
+INSERT INTO param(param_Id, parent_App_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param1', 'param 1', 1, '', '', 'text');
+INSERT INTO param(param_Id, parent_App_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param2', 'param 2', 2, '', '', 'text');
+INSERT INTO param(param_Id, parent_App_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param3', 'param 3', 3, '', '', 'text');

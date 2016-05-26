@@ -9,4 +9,4 @@
 * user bean √
 * use session in Spring √
 * in memory db √
-* first scheme
+* first app

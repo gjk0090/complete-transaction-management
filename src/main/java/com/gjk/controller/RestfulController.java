@@ -6,13 +6,16 @@ import java.util.*;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gjk.domain.App;
 import com.gjk.domain.Book;
 import com.gjk.domain.UserInfo;
+import com.gjk.repository.AppRepository;
 import com.gjk.repository.BookRepository;
 import com.gjk.repository.UserRepository;
 
@@ -24,6 +27,8 @@ public class RestfulController {
 	private BookRepository bookRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private AppRepository appRepository;
 	
 	@RequestMapping(value = "/initInfo", method = RequestMethod.GET)
 	public Map<String, Object> getInitInfo(Principal principal, HttpSession session) {
@@ -48,14 +53,24 @@ public class RestfulController {
 		
 		returnMap.put("userInfo", userInfo);
 		session.setAttribute("userInfo", userInfo);
+		
+		Iterable<App> appList = appRepository.findAll();
+		returnMap.put("appList", appList);
+		session.setAttribute("appList", appList);
 
 		return returnMap;
 	}
-
-	@RequestMapping
-	public String hello() {
-		return "Hello Spring-Boot";
+	
+	@RequestMapping(value="/childApps/{appId}", method = RequestMethod.GET)
+	public Iterable<App> getApps(@PathVariable int appId){
+		return appRepository.findAppsByParentAppId(appId);
 	}
+
+	@RequestMapping(value="/app/{appId}", method = RequestMethod.GET)
+	public App getApp(@PathVariable int appId){
+		return appRepository.findAppByAppId(appId);
+	}
+
 
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public Iterable<Book> getList() {
