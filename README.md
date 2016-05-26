@@ -6,7 +6,7 @@
 
 ###To Do
 * auto restart
-* user bean
-* use session in Spring
-* in memory db / mysql
+* user bean √
+* use session in Spring √
+* in memory db √
 * first scheme

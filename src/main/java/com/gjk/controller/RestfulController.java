@@ -45,6 +45,7 @@ public class RestfulController {
 			returnMap.put("message", "Sorry, failed to get user information, please log in again.");
 			return returnMap;
 		}
+		
 		returnMap.put("userInfo", userInfo);
 		session.setAttribute("userInfo", userInfo);
 
