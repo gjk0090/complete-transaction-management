@@ -16,21 +16,9 @@ app.controller('mainCtrl',function($rootScope, $scope, $http, $location){
 			//get user bean
 			$rootScope.userInfo = result.data.userInfo;
 			
-			//build app list
-			$rootScope.appList = [];
-			result.data.appList.forEach(function(app){
-				if(app.parentAppId === 0){
-					app.childApps = [];
-					$rootScope.appList.push(app);
-				}
-			});
-			result.data.appList.forEach(function(app){
-				$rootScope.appList.forEach(function(parentApp){
-					if(parentApp.appId === app.parentAppId){
-						parentApp.childApps.push(app);
-					}
-				});
-			});
+			//get first level app list
+			$rootScope.appList = result.data.appList;
+
 		}, 
 		function(result){
 			

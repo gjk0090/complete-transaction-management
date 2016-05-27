@@ -11,7 +11,7 @@ INSERT INTO book(isbn, title, author,description) VALUES ('5555555', 'Spirit''s 
 INSERT INTO userinfo(username, fname, lname, email) VALUES ('gjk', 'jk', 'gao', 'gaojk0090@gmail.com');
 INSERT INTO userinfo(username, fname, lname, email) VALUES ('admin', 'ad', 'min', 'gaojk0090@gmail.com');
 
-INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (1, 0, 'parentapp', 'parent app');
+INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (1, null, 'parentapp', 'parent app');
 INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (2, 1, 'childapp1', 'child app 1');
 INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (3, 1, 'childapp2', 'child app 2');
 

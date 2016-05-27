@@ -32,7 +32,7 @@
 					<li class="dropdown" ng-repeat="parentApp in appList">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{parentApp.appDisplayName}}<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li ng-repeat="childApp in parentApp.childApps"><a href="#">{{childApp.appDisplayName}}</a></li>
+							<li ng-repeat="childApp in parentApp.childAppList"><a href="#">{{childApp.appDisplayName}}</a></li>
 						</ul>
 					</li>
 					<li><a href="/h2-console">H2 Console</a></li>

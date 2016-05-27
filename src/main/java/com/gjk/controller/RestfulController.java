@@ -54,7 +54,8 @@ public class RestfulController {
 		returnMap.put("userInfo", userInfo);
 		session.setAttribute("userInfo", userInfo);
 		
-		Iterable<App> appList = appRepository.findAll();
+		//find all first level app
+		Iterable<App> appList = appRepository.findAppsByParentApp(null);
 		returnMap.put("appList", appList);
 		session.setAttribute("appList", appList);
 
@@ -62,8 +63,8 @@ public class RestfulController {
 	}
 	
 	@RequestMapping(value="/childApps/{appId}", method = RequestMethod.GET)
-	public Iterable<App> getApps(@PathVariable int appId){
-		return appRepository.findAppsByParentAppId(appId);
+	public Iterable<App> getChildApps(@PathVariable int appId){
+		return appRepository.findAppsByParentApp(new App(appId));
 	}
 
 	@RequestMapping(value="/app/{appId}", method = RequestMethod.GET)

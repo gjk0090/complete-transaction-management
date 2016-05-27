@@ -80,9 +80,6 @@ public class Param {
 		return app.getAppId();
 	}
 
-	public void setAppId(int appId) {
-		this.app.setAppId(appId);
-	}
 
 //  Do not give getter for App, it will cause infinite loop in json
 //	public App getApp() {
