@@ -16,8 +16,8 @@ public class Param {
 	private String paramType;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parentAppId", nullable = false)
-	private App parentApp;
+	@JoinColumn(name = "appId", nullable = false)
+	private App app;
 
 	public int getParamId() {
 		return paramId;
@@ -75,12 +75,21 @@ public class Param {
 		this.paramType = paramType;
 	}
 
+	//giving this will add a appId field in json
+	public int getAppId() {
+		return app.getAppId();
+	}
+
+	public void setAppId(int appId) {
+		this.app.setAppId(appId);
+	}
+
 //  Do not give getter for App, it will cause infinite loop in json
-//	public App getParentApp() {
-//		return parentApp;
+//	public App getApp() {
+//		return app;
 //	}
-//	public void setParentApp(App parentApp) {
-//		this.parentApp = parentApp;
+//	public void setParentApp(App app) {
+//		this.app = app;
 //	}
 
 	

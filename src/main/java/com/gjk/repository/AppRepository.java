@@ -13,5 +13,5 @@ public interface AppRepository extends CrudRepository<App, String>{
 	
 	// these methods will be auto created according to Spring convention
 	public App findAppByAppId(@Param("appId") int appId);
-	public Iterable<App> findAppsByParentAppId(@Param("appId") int appId);
+	public Iterable<App> findAppsByParentAppId(@Param("parentAppId") int parentAppId);
 }

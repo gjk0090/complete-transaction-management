@@ -14,7 +14,14 @@ public class App {
 	private String appName;
 	private String appDisplayName;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parentApp")
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parentApp")
+//	private List<App> childAppList;
+//	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "appId", nullable = false)
+//	private App parentApp;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "app")
 	private List<Param> paramList;
 
 	public int getAppId() {
