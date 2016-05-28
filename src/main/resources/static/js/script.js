@@ -4,7 +4,7 @@ app.controller('mainCtrl',function($rootScope, $scope, $http, $location){
 	//get initial information
 	$http.get('rest/initInfo').then(
 		function(result){
-			//alert(JSON.stringify(result.data));
+			//alert(JSON.stringify(result.data, null, 4));
 			
 			//test error
 			if(result.data.error){
