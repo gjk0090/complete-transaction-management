@@ -2,7 +2,10 @@ package com.gjk.domain;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+//@JsonIgnoreProperties({"paramProperties","paramSequence"})
 public class Param {
 
 	@Id
