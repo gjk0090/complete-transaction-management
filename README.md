@@ -10,3 +10,9 @@
 * use session in Spring √
 * in memory db √
 * first app
+* custom processor
+* custom js
+* root scope functions
+* xml buttons
+* list view
+* edit view
