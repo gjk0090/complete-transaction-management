@@ -13,6 +13,10 @@
 * custom processor
 * custom js
 * root scope functions
+* xml app config
 * xml buttons
 * list view
 * edit view
+* automatic search fields
+* summary page
+* app category
