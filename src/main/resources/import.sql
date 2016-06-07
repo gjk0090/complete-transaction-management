@@ -15,9 +15,9 @@ INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (1, nu
 INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (2, 1, 'childapp1', 'child app 1');
 INSERT INTO app(app_Id, parent_App_Id, app_Name, app_Display_Name) VALUES (3, 1, 'childapp2', 'child app 2');
 
-INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param1', 'param 1', 1, '', '', 'text');
-INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param2', 'param 2', 2, '', '', 'text');
-INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param3', 'param 3', 3, '', '', 'text');
-INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param1', 'param 1', 1, '', '', 'text');
-INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param2', 'param 2', 2, '', '', 'text');
-INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param3', 'param 3', 3, '', '', 'text');
+INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_max_length, param_mode, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param1', 'param 1', 1, 20, 'OUT', '', '', 'text');
+INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_max_length, param_mode, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param2', 'param 2', 2, 20, 'OUT', '', '', 'text');
+INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_max_length, param_mode, param_Properties, param_Category, param_Type) VALUES (null, 2, 'param3', 'param 3', 3, 20, 'OUT', '', '', 'text');
+INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_max_length, param_mode, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param1', 'param 1', 1, 20, 'OUT', '', '', 'text');
+INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_max_length, param_mode, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param2', 'param 2', 2, 20, 'OUT', '', '', 'text');
+INSERT INTO param(param_Id, app_Id, param_Name, param_Display_Name, param_Sequence, param_max_length, param_mode, param_Properties, param_Category, param_Type) VALUES (null, 3, 'param3', 'param 3', 3, 20, 'OUT', '', '', 'text');

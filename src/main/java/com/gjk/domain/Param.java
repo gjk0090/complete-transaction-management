@@ -14,6 +14,8 @@ public class Param {
 	private String paramName;
 	private String paramDisplayName;
 	private int paramSequence;
+	private int paramMaxLength;
+	private String paramMode;
 	private String paramProperties;
 	private String paramCategory;
 	private String paramType;
@@ -52,6 +54,22 @@ public class Param {
 
 	public void setParamSequence(int paramSequence) {
 		this.paramSequence = paramSequence;
+	}
+
+	public int getParamMaxLength() {
+		return paramMaxLength;
+	}
+
+	public void setParamMaxLength(int paramMaxLength) {
+		this.paramMaxLength = paramMaxLength;
+	}
+
+	public String getParamMode() {
+		return paramMode;
+	}
+
+	public void setParamMode(String paramMode) {
+		this.paramMode = paramMode;
 	}
 
 	public String getParamProperties() {

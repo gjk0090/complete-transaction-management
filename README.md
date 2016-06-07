@@ -20,3 +20,5 @@
 * automatic search fields
 * summary page
 * app category
+* param category
+* value table
