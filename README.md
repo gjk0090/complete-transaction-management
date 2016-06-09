@@ -22,3 +22,4 @@
 * app category
 * param category
 * value table
+* multiple input source
